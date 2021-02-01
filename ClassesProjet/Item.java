@@ -4,13 +4,11 @@ public class Item {
     String idItem;
     String nom;
     String prix;
-    String quantite;
 
-    public Item (String idItem, String nom, String quantite, String prix){
+    public Item (String idItem, String nom, String prix){
         this.idItem = idItem;
         this.nom = nom;
         this.prix = prix;
-        this.quantite = quantite;
     }
 
     public String getId (){
@@ -23,9 +21,5 @@ public class Item {
 
     public Double getPrix (){
         return Double.parseDouble(prix);
-    }
-
-    public int getQuantite (){
-        return Integer.parseInt(quantite);
     }
 }

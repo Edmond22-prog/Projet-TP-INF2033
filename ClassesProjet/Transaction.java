@@ -1,15 +1,17 @@
 package ClassesProjet; 
-import ClassesProjet.*;
+import ClassesProjet.Item;
 
 public class Transaction {
     String idTrans;
-    Itemset produits;
+    Item [] produits;
     String idClient;
+    int compt;  // Compteur du nombre d'items
 
-    public Transaction (String idTrans, Itemset produits, String idClient){
+    public Transaction (String idTrans, String idClient){
         this.idTrans = idTrans;
-        this.produits = produits;
         this.idClient = idClient;
+        produits = new Item [100];
+        compt = 0;
     }
 
     public String getIdTransaction (){
@@ -20,14 +22,34 @@ public class Transaction {
         return idClient;
     }
 
+    /* Methode qui renvoi un tableau d'items, soit un tableau de produit */
+    public Item [] getProduits (){
+        return produits;
+    }
+
     /* Methode permettant d'ajouter un produit (item) dans le panier de transaction */
-    public Transaction ajouterItem (Item item){
-        produits = produits.ajouter(item);
-        return new Transaction(this.idTrans, produits, this.idClient);
+    public void ajouterItem (Item item){
+        produits [compt] = item;
+        compt++;   
     }
 
     public void afficheProduits (){
         System.out.println ("Pour la transaction "+this.getIdTransaction());
-        produits.affiche();
+        for (int i = 0; i < compt; i++){
+            System.out.println ("- "+produits[i].getNom());
+        }
+        System.out.print ("\n\n");
+    }
+
+    public int getVolumeTransaction (){
+        return compt;
+    }
+
+    public boolean contient (String idItem){
+        for (int i = 0; i < compt; i++){
+            if (produits[i].getId().equals(idItem))
+                return true;
+        }
+        return false;
     }
 }
